@@ -1,0 +1,58 @@
+
+    <link rel="stylesheet" href="style.css">
+    <div id="outer">
+         <div class="inner"><h2 style="margin-top:20px;margin-bottom:3px;">TODO App</h2></div>
+         <form action="/addTask" method="POST" id="form">
+            <div style="position:relative;" class="blocks">
+                <span class="span" style="left:3%;">DESCRIPTION</span>
+                <input type="text" name="title" placeholder="What do you need to do?" style="width: 100%;height:100%;text-indent:3%;">
+            </div>
+            <div style="display:flex;" class="blocks">
+                <div class="inside-blocks">
+                    <span class="span">CATEGORY</span>
+                    <select name="category" style="width: 100%;height:100%;text-indent:6%;">
+                         <option value="Personal">Personal</option>
+                         <option value="School">School</option>
+                         <option value="Work">Work</option>
+                         <option value="Workout">Workout</option>
+                         <option value="Fun">Fun</option>
+                    </select>
+                </div>
+                <div class="inside-blocks">
+                    <span class="span">DUE DATE</span>
+                    <input name="date" type="date" style="width: 100%;height:100%;text-indent:6%;">
+                </div>
+            </div>
+            <div class="blocks" style="height:75px;position: relative;display:flex;justify-content: space-around;">
+                 <button type="submit" class="btn" style="background-color: chartreuse;"><i class="fas fa-plus"></i>Add Task</button>
+                 <button type="button" class="btn" style="background-color: red;"><i class="fas fa-trash-alt"></i>Delete</button>
+            </div>
+            <div>
+                <% for(let x of toDolist){ 
+                    let t=x.category;let c;
+                    if(t=='Personal')
+                      c='crimson';
+                    else if(t=='School')
+                      c='cyan';
+                    else if(t=='Work')
+                      c='mediumblue';
+                    else if(t=='Workout')
+                      c='yellow';
+                    else 
+                      c='orange'       
+                %>
+                 <div class="tasks">
+                     <div style="width:20%;height:100%;" data-value="<%= x._id %>"><input type="checkbox" style="height:30px;width:30px;margin-top:10px;"></div>
+                     <div>
+                         <h3 style="margin-top:5px;"><%= x.title %></h3><%= x.date %>
+                     </div>
+                     <div id="category" style="background-color:<%= c %>;">
+                         <%= x.category %>
+                     </div>
+                 </div>
+                <% } %>
+            </div>
+         </form>
+    </div>
+    <script type="text/javascript" src="jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="style.js"></script>
